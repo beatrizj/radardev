@@ -48,8 +48,13 @@ module.exports = {
     },
 
     async update(req, res) {
+        const { id } = req.params
+        const { github_username, name, techs, bio } = req.body
+        const techsArray = parseStringAsArray(techs)
         
+        await Dev.findByIdAndUpdate(id, { name, bio, techsArray }, {new: true})
 
+        return res.json({ github_username, name, bio, techsArray })
     },
 
     async destroy(req, res) {
