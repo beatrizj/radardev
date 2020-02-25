@@ -1,14 +1,18 @@
 const express = require('express')
 const mongoose = require('mongoose') //conexão com o Mongo
 const routes = require('./routes')
+const cors = require('cors') //permite o acesso de outros endereços
 
 const app = express()
 
-mongoose.connect('mongodb+srv://beatrizj:<Amendoporco01>@cluster0-5ltns.mongodb.net/omnistack10?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://beatrizj:Amendoporco01@cluster0-5ltns.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
 
+mongoose.set('useFindAndModify', false)
+
+app.use(cors())
 app.use(express.json()) //para o express entender JSON
 app.use(routes)
 
